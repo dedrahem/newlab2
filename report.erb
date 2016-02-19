@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="stylesheet" href="/css/master.css" media="screen" title="no title" charset="utf-8">
+
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://necolas.github.io/normalize.css/3.0.3/normalize.css">
+
+  <head>
+    <meta charset ="utf-8">
+    <title></title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+          google.charts.load('current', {'packages':['corechart']});
+          google.charts.setOnLoadCallback(drawChart);
+          function drawChart() {
+
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Hours per Day'],
+              ['Fry ',    <%= m[0] %>],
+              ['Amy',   <%= m[1] %>],
+              ['Bender',    <%= m[2]%>],
+              ['Leela', <%= m[3] %>],
+            ]);
+
+            var options = {
+              title: 'Plant Express - Revenue Breakdown for the Week'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+          }
+        </script>
+      </head>
+
+  <body>
+    <!-- BEGIN MAIN BODY -->
+
+
+    <div class = "chart_wrapper">
+
+    <div class = "page_wrapper">
+      <p>  </p>
+
+      <div class = "hdr1">
+        Planet Express - Weekly Revenue
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Destination
+            </th>
+            <th>
+              Cargo
+            </th>
+            <th>
+              Containers
+            </th>
+            <th>
+              Revenues
+            </th>
+          </tr>
+        </thead>
+
+
+        <% x = 0  %>
+        <% while x < 9 %>
+          <tr>
+            <td>
+              <%= destination[x]%>
+            </td>
+            <td>
+              <%= shipment[x] %>
+            </td>
+            <td>
+              <%= containers[x] %>
+            </td>
+            <td>
+              <%= newmoney[x] %>
+            </td>
+          </tr>
+            <% x += 1 %>
+        <% end %>
+
+      </table>
+<!-- this closes the CSV global data table -->
+<p>  </p>
+<!-- this begins the SMALL table of pilot trips and bonus -->
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Pilot
+            </th>
+            <th>
+              Trips
+            </th>
+            <th>
+              Bonus
+            </th>
+          </tr>
+        </thead>
+
+          <% table2.each do |pilot_data| %>
+          <tr>
+            <td>
+              <%= pilot_data[:Pilot] %>
+            </td>
+            <td>
+              <%= pilot_data[:Trips] %>
+            </td>
+            <td>
+              <%= pilot_data[:Bonus] %>
+            </td>
+          </tr>
+          <% end %>
+      </table>
+      <!-- CLOSE the SMALL table of pilot trips and bonus -->
+
+<!--  BEGIN the really SMALL TABLE FOR PILOT AND PILOT's TOTAL REVENUE -->
+<p>  </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>
+              Pilot
+            </th>
+            <th>
+              Revenue
+            </th>
+          </tr>
+        </thead>
+          <tr>
+            <td>
+              <%=p[0]%>
+            </td>
+            <td>
+              <%= m[0] %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= p[1]%>
+            </td>
+            <td>
+              <%= m[1] %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= p[2]%>
+            </td>
+            <td>
+              <%= m[2] %>
+            </td>
+            </tr>
+            <tr>
+              <td>
+                <%= p[3]%>
+              </td>
+              <td>
+                <%= m[3] %>
+              </td>
+            </tr>
+      </table>
+      <!--  CLOSE the really SMALL TABLE FOR PILOT AND PILOT's TOTAL REVENUE -->
+
+    </div>
+    <!-- closes the page wrapper div -->
+
+    <div class = "chart">
+      <a id="piechart" style="width: 600px; height: 350px; backgroundColor.fill: #b3f2eb; fontSize: 20px;"></a>
+    </div>
+    <div class="image">
+            <a>
+             <img src="image/bender-gif.gif"/>
+           </a>
+        </div>
+
+  </div>
+  <!-- CLOSE THE CHART WRAPPER -->
+  </body>
+  <!-- closes the main body -->
+</html>
